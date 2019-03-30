@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { ScrollView, View, StyleSheet, Button, TouchableOpacity, Image, Text, KeyboardAvoidingView } from 'react-native';
+import { ScrollView, View, StyleSheet, Button, TouchableOpacity, Image, Text, KeyboardAvoidingView, PermissionsAndroid } from 'react-native';
 import { Icon } from 'react-native-elements';
 import t from 'tcomb-form-native';
+//import Contacts from 'react-native-contacts';
+import { Contacts } from 'expo';
+
 
 const Form = t.form.Form;
 
@@ -56,11 +59,71 @@ export default class MyCardScreen extends Component {
     }
   }
 
+  // async function checkMultiPermissions() {
+  //   // const { Permissions } = Expo;
+  //   // const { status, permissions } = await Permissions.askAsync(Permissions.CONTACTS);
+  //   //
+  //   // if (status === 'granted') {
+  //   //   console.log('granted');
+  //   // } else {
+  //   //   throw new Error('Location permission not granted');
+  //   // }
+  // }
+
+
+  // addNewContact() {
+  //     var newPerson = {
+  //     emailAddresses: [{
+  //       label: "work",
+  //       email: "mrniet@example.com",
+  //     }],
+  //     familyName: "Nietzsche",
+  //     givenName: "Friedrich",
+  //   }
+  //
+  //   Contacts.openContactForm(newPerson, (err, contact) => {
+  //     if (err) throw err;
+  //     console.log("contact has been opened");
+  //   })
+  // }
+
+
+  async showFirstContactAsync() {
+    // Ask for permission to query contacts.
+    const permission = await Permissions.askAsync(Permissions.CONTACTS);
+
+    if (permission.status !== 'granted') {
+      // Permission was denied...
+      return;
+    }
+    const contacts = await Contacts.getContactsAsync({
+      fields: [
+        Contacts.PHONE_NUMBERS,
+        Contacts.EMAILS,
+      ],
+      pageSize: 10,
+      pageOffset: 0,
+    });
+    if (contacts.total > 0) {
+      Alert.alert(
+        'Your first contact is...',
+        `Name: ${contacts.data[0].name}\n` +
+        `Phone numbers: ${contacts.data[0].phoneNumbers[0].number}\n` +
+        `Emails: ${contacts.data[0].emails[0].email}`
+      );
+    }
+  }
+
+  componentDidMount() {
+    //console.log('GrandChild did mount.');
+    // checkMultiPermissions();
+    showFirstContactAsync();
+  }
 
   static navigationOptions = {
     title: 'Add Contact',
     headerRight: (
-      <TouchableOpacity onPress={()=>{}}>
+      <TouchableOpacity onPress={()=>{showFirstContactAsync();}}>
         <Icon
           type="material-community"
           name="settings"
