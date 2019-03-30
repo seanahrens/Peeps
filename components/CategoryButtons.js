@@ -29,8 +29,8 @@ class CategoryButtons extends React.Component {
     const relationship_type = [
       { element: () => <Icon type='material-community' name='account-heart' /> },
       { element: () => <Icon type='material-icons' name='person' /> },
-      { element: () => <Icon type='material-community' name='human-female-boy' /> },
       { element: () => <Icon type='material-community' name='tie' /> },
+      { element: () => <Icon type='material-community' name='human-female-boy' /> },
       { element: () => <Icon type='material-community' name='heart-broken' /> },
     ]
 

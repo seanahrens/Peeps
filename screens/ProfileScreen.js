@@ -76,6 +76,19 @@ const contactView = () => (
       </TouchableOpacity>
 
       <Form type={User} options={options} />
+      <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+        <Button
+          onPress={()=>{}}
+          title="Archive"
+          color="black"
+          accessibilityLabel=""
+        />
+        <Button
+          style={styles.secondaryButton}
+          onPress={() => {}}
+          title="Import"
+        />
+      </View>
 
     </View>
   </View>
@@ -146,8 +159,8 @@ export default class ProfileScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  nextContact: {
-    display: 'none',
+  secondaryButton: {
+    backgroundColor: 'lightgray'
   },
   scene: {
    flex: 1,

@@ -7,13 +7,29 @@ import AddScreen from '../screens/AddScreen';
 import BrowseScreen from '../screens/BrowseScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import UpdateScreen from '../screens/UpdateScreen';
+import MyCardScreen from '../screens/MyCardScreen';
 
-const HomeStack = createStackNavigator({
-  Home: AddScreen,
+
+const AddStack = createStackNavigator({
+  Add: AddScreen,
 });
 
-HomeStack.navigationOptions = {
+AddStack.navigationOptions = {
   tabBarLabel: 'Add',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-person-add' : 'md-person-add'}
+    />
+  ),
+};
+
+const MyCardStack = createStackNavigator({
+  MyCard: MyCardScreen,
+});
+
+MyCardStack.navigationOptions = {
+  tabBarLabel: 'Me',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -41,12 +57,12 @@ BrowseStack.navigationOptions = {
   ),
 };
 
-const SettingsStack = createStackNavigator({
-  Settings: UpdateScreen,
+const RecentStack = createStackNavigator({
+  Recent: UpdateScreen,
   Profile: ProfileScreen,
 });
 
-SettingsStack.navigationOptions = {
+RecentStack.navigationOptions = {
   tabBarLabel: 'Recent',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -58,6 +74,7 @@ SettingsStack.navigationOptions = {
 
 export default createBottomTabNavigator({
   BrowseStack,
-  HomeStack,
-  SettingsStack,
+  AddStack,
+  MyCardStack,
+  RecentStack,
 });
