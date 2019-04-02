@@ -5,8 +5,11 @@ import { AsyncStorage } from 'react-native';
 const STORAGE_KEY = 'MY_CARD';
 
 const DEFAULT_DATA = {
-  name: 'Juice in Da!',
-  email: 'jindap@gmail.com',
+  name: 'Sean Ahrens',
+  email: '',
+  phone: '',
+  location: 'San Juan, PR',
+  website: 'seanahrens.org',
 };
 
 export const loadMyCard = async () => {

@@ -1,0 +1,30 @@
+GEO
+
+  1.
+  Move permissions, contacts, and location to an app.js global store.
+
+  2.
+  Add boolean to datastore (in_contacts_app: true/false)
+
+
+App.js
+  this.state.myLocale
+  this.state.contacts // (grouped by locale)
+  this.state.addressBook // direct copy of contacts returned by contacts API
+
+
+  hasLocaleChanged?(){
+    currentLocale = currentLocale();
+    if currentLocale !== this.state.myLocale { // there may be location specific code avai
+      this.setState({ myLocale: currentLocale })
+      this.setState({ contacts: sortContactsByLocale(currentLocale) });
+    }
+  }
+
+  sortContactsByLocale(){
+    return contacts.arraySort((a,b){ latLonDistance(a.lat,a.lon,b.lat,b.lon) })
+  }
+
+  latLonDistance(){
+    return (a.lat - b.lat + a.lon - b.lon);
+  }

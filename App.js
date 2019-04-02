@@ -1,4 +1,4 @@
- import React from 'react';
+import React from 'react';
 import { Platform, StatusBar, StyleSheet, View, Text } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
@@ -7,7 +7,46 @@ import AppNavigator from './navigation/AppNavigator';
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
+    permission: '',
+
+    phoneContacts: {}, // direct copy of contacts returned by contacts API
+    appContacts: {}, // (grouped by locale)
+
+    myLocation: {
+      lat: null,
+      lon: null,
+      name: null, //"1600",
+      street: null, //"Amphitheatre Parkway",
+
+      city: null, //": "Mountain View",
+      region: null, //"California",
+
+      postalCode: null, //"94043",
+      isoCountryCode: null, //"US",
+      country: null, //"United States",
+    },
+
   };
+
+
+  // hasLocaleChanged?(){
+  //   // currentLocale = currentLocale();
+  //   // if currentLocale !== this.state.myLocale { // there may be location specific code avai
+  //   //   this.setState({ myLocale: currentLocale })
+  //   //   this.setState({ contacts: sortContactsByLocale(currentLocale) });
+  //   // }
+  // }
+  //
+  // sortContactsByLocale(){
+  //   // return contacts.arraySort((a,b){ latLonDistance(a.lat,a.lon,b.lat,b.lon) })
+  // }
+  //
+  // latLonDistance(){
+  //   // return (a.lat - b.lat + a.lon - b.lon);
+  // }
+
+
+
 
   render() {
 
